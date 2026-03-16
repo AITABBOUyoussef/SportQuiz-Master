@@ -1,8 +1,1 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* T9der t-zid hna chi global transition l-dark mode */
-body {
-  @apply transition-colors duration-300;
-}
+@import "tailwindcss";
