@@ -1,28 +1,29 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useReducer } from "react";
 
-const ThemeContext = createContext();
+const QuizContext = createContext();
 
-export const ThemeProvider = ({ children }) => {
-  const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("theme") === "dark"
-  );
+const initialState = {
+  questions: [],
+  status: "idle", // 'loading', 'error', 'ready', 'active', 'finished'
+  index: 0,
+  score: 0,
+};
 
-  useEffect(() => {
-    const root = window.document.documentElement;
-    if (darkMode) {
-      root.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      root.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [darkMode]);
+function reducer(state, action) {
+  switch (action.type) {
+    case "start": return { ...state, status: "active" };
+    case "restart": return { ...initialState, status: "ready" };
+    default: return state;
+  }
+}
 
+export const QuizProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
+    <QuizContext.Provider value={{ ...state, dispatch }}>
       {children}
-    </ThemeContext.Provider>
+    </QuizContext.Provider>
   );
 };
 
-export const useTheme = () => useContext(ThemeContext);
+export const useQuiz = () => useContext(QuizContext);
