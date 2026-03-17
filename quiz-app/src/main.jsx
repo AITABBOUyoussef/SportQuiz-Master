@@ -2,12 +2,15 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
-import { ThemeProvider } from './context/ThemeContext' // Ghadi t-sweb had l-fichier
+import { ThemeProvider } from './context/ThemeContext'
+import { QuizProvider } from './context/QuizContext' // 👈 Zid hadi
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider>
-      <App />
+      <QuizProvider> {/* 👈 Wrap l-App hna */}
+        <App />
+      </QuizProvider>
     </ThemeProvider>
   </React.StrictMode>,
 )

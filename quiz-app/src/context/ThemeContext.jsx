@@ -1,15 +1,16 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-// 1. Création dyal l-context
+// 1. Kriyi l-context khawi
 const ThemeContext = createContext();
 
-// 2. L-Provider li ghadi y-haz l-état
 export const ThemeProvider = ({ children }) => {
+  // Check wach l-user deja khtar dark mode f l-browser dyalo
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem("theme");
-    return saved === "dark" || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    return saved === "dark";
   });
 
+  // Kola marra t-beddel darkMode, ghadi n-zidou walla n-7iydou class 'dark' men l-HTML
   useEffect(() => {
     const root = window.document.documentElement;
     if (darkMode) {
@@ -21,18 +22,15 @@ export const ThemeProvider = ({ children }) => {
     }
   }, [darkMode]);
 
+  // Fonction li kti-t-callee melli kti-cliqui l-bouton
   const toggleTheme = () => setDarkMode(!darkMode);
 
   return (
     <ThemeContext.Provider value={{ darkMode, toggleTheme }}>
-      {children}
+      {children} {/* Hna fin kti-koun l-App kamla */}
     </ThemeContext.Provider>
   );
 };
 
-// 3. L-Hook bach n-esta3mloh f les autres composants (Bhal ThemeToggle)
-export const useTheme = () => {
-  const context = useContext(ThemeContext);
-  if (!context) throw new Error("useTheme must be used within a ThemeProvider");
-  return context;
-};
+// Hook sahla bach l-okhrin y-esta3mlo l-theme
+export const useTheme = () => useContext(ThemeContext);
