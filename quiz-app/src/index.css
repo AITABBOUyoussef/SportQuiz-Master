@@ -1,1 +1,5 @@
-@import "tailwindcss";
+@import "tailwindcss"; /* kiy-jib Tailwind v4 kamel l-projet */
+/* Transition bach l-alwan y-tbeddlo s-moothly melli kti-cliqui dark mode */
+body {
+  @apply transition-colors duration-300;
+}
