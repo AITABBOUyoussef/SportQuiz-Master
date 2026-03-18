@@ -3,6 +3,7 @@ import { useQuiz } from "./context/QuizContext";
 import { fetchQuestions } from "./services/quizAPI";
 import StartScreen from "./pages/StartScreen";
 import QuizPage from "./pages/QuizPage";
+import ResultPage from "./pages/ResultPage"; // 👈 Importina ResultPage
 import ThemeToggle from "./components/ui/ThemeToggle";
 import Loader from "./components/ui/Loader";
 
@@ -13,7 +14,7 @@ function App() {
     const load = async () => {
       dispatch({ type: "loading" });
       try {
-        const data = await fetchQuestions(); // Khdam b l-URL dyalk
+        const data = await fetchQuestions(); 
         dispatch({ type: "dataReceived", payload: data });
       } catch (err) {
         dispatch({ type: "dataFailed" });
@@ -34,7 +35,7 @@ function App() {
            {status === "loading" && <Loader />}
            {status === "ready" && <StartScreen onStart={() => dispatch({ type: "start" })} />}
            {status === "active" && <QuizPage />}
-           {status === "finished" && <h1 className="dark:text-white">Saliiti! 🏆</h1>}
+           {status === "finished" && <ResultPage />} {/* 👈 Hna kiban l-score f l-lekher */}
         </div>
       </main>
     </div>

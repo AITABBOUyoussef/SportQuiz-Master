@@ -4,7 +4,7 @@ const QuizContext = createContext();
 
 const initialState = {
   questions: [],
-  status: "idle", // status: idle, loading, error, ready, active, finished
+  status: "idle", 
   index: 0,
   answer: null,
   score: 0,
@@ -15,9 +15,17 @@ function reducer(state, action) {
     case "loading": return { ...state, status: "loading" };
     case "dataReceived": return { ...state, questions: action.payload, status: "ready" };
     case "dataFailed": return { ...state, status: "error" };
-    case "start": return { ...state, status: "active" };
-    case "newAnswer": return { ...state, answer: action.payload };
+    case "start": return { ...state, status: "active", index: 0, score: 0, answer: null };
+    case "newAnswer":
+      // Check wach l-jawwab s7i7 bach n-zidou 10 noqat
+      const isCorrect = action.payload === state.questions[state.index].correct_answer;
+      return { 
+        ...state, 
+        answer: action.payload, 
+        score: isCorrect ? state.score + 10 : state.score 
+      };
     case "nextQuestion": return { ...state, index: state.index + 1, answer: null };
+    case "finished": return { ...state, status: "finished" };
     case "restart": return { ...initialState, questions: state.questions, status: "ready" };
     default: return state;
   }
