@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --dark-mode: class; /* 👈 HADI HIYA S-SAROUT DYAL DARK MODE F V4 */
+  /* Hada houwa s-sarout dyal Dark Mode f v4 */
+  --dark-mode: class; 
 }
 
+/* Bach l-alwan y-tbeddlo b-chwiya o smooth */
 body {
   @apply transition-colors duration-300;
 }
