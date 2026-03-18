@@ -17,13 +17,8 @@ function reducer(state, action) {
     case "dataFailed": return { ...state, status: "error" };
     case "start": return { ...state, status: "active", index: 0, score: 0, answer: null };
     case "newAnswer":
-      // Check wach l-jawwab s7i7 bach n-zidou 10 noqat
       const isCorrect = action.payload === state.questions[state.index].correct_answer;
-      return { 
-        ...state, 
-        answer: action.payload, 
-        score: isCorrect ? state.score + 10 : state.score 
-      };
+      return { ...state, answer: action.payload, score: isCorrect ? state.score + 10 : state.score };
     case "nextQuestion": return { ...state, index: state.index + 1, answer: null };
     case "finished": return { ...state, status: "finished" };
     case "restart": return { ...initialState, questions: state.questions, status: "ready" };
