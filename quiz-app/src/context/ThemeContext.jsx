@@ -4,19 +4,17 @@ const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
   const [darkMode, setDarkMode] = useState(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("theme") === "dark";
-    }
-    return false;
+    // Check wach deja m-savi f localStorage
+    const saved = localStorage.getItem("theme");
+    return saved === "dark" || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches);
   });
 
   useEffect(() => {
-    const root = window.document.documentElement;
     if (darkMode) {
-      root.classList.add("dark");
+      document.documentElement.classList.add("dark"); // 👈 Hna fin kti-khdem s-s7er
       localStorage.setItem("theme", "dark");
     } else {
-      root.classList.remove("dark");
+      document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
     }
   }, [darkMode]);
@@ -31,3 +29,4 @@ export const ThemeProvider = ({ children }) => {
 };
 
 export const useTheme = () => useContext(ThemeContext);
+export default ThemeProvider;

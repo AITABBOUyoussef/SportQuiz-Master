@@ -6,7 +6,7 @@ import { ThemeProvider } from './context/ThemeContext';
 import { QuizProvider } from './context/QuizContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // 7iydna <React.StrictMode> men hna bach l-API ma-t-t-lancer-ch 2 marrat
+  // 7iyedna StrictMode bach l-API ma-t-bloka-ch
   <ThemeProvider>
     <QuizProvider>
       <App />
