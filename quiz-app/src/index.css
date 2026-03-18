@@ -1,5 +1,9 @@
-@import "tailwindcss"; /* kiy-jib Tailwind v4 kamel l-projet */
-/* Transition bach l-alwan y-tbeddlo s-moothly melli kti-cliqui dark mode */
+@import "tailwindcss";
+
+@theme {
+  --dark-mode: class; /* 👈 HADI HIYA S-SAROUT DYAL DARK MODE F V4 */
+}
+
 body {
   @apply transition-colors duration-300;
 }
