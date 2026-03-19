@@ -1,4 +1,4 @@
-import Quizpage from "./pages/QuizPage";
+import Quizpage from "./components/pages/QuizPage";
 
 export default function app(){
   return(
