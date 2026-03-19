@@ -11,7 +11,7 @@ const ResultPage = () => {
         {score} <span className="text-2xl text-gray-400">/ {maxScore}</span>
       </p>
       <button onClick={() => dispatch({ type: "restart" })} className="w-full py-4 mt-4 bg-slate-900 dark:bg-blue-600 text-white rounded-2xl font-bold active:scale-95">
-        Rejouer 🔄
+        Rejouer 
       </button>
     </div>
   );
