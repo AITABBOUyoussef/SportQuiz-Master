@@ -3,7 +3,7 @@ import { useQuiz } from "./context/QuizContext";
 import { fetchQuestions } from "./services/quizAPI";
 import StartScreen from "./pages/StartScreen";
 import QuizPage from "./pages/QuizPage";
-import ResultPage from "./pages/ResultPage"; // 👈 Zid hadi
+import ResultPage from "./pages/ResultPage"; 
 import ThemeToggle from "./components/ui/ThemeToggle";
 import Loader from "./components/ui/Loader";
 
