@@ -10,10 +10,18 @@ export default function Quizpage() {
   const [level, setLevel] = useState("easy");
   const [number, setNumber] = useState(10);
 
+  const handleStart =() =>  {
+    if(!category){
+      alert("choisir une catégorie");
+      return;
+    }
+      setstarted(true);
+  }
+
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       <Header />
-      <Banner />
+      <Banner onStart={handleStart} />
       <Categories setCategory={setCategory} />
       <LevelSelector level={level} setLevel={setLevel} />
       <QuestionNumber number={number} setNumber={setNumber} />
