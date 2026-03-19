@@ -26,7 +26,7 @@ function App() {
   return (
     <div className="min-h-screen transition-colors duration-300">
       <header className="p-4 flex justify-between items-center max-w-4xl mx-auto">
-        <div className="text-2xl font-black text-blue-600 dark:text-blue-400">SportQuiz</div>
+        <div className="text-2xl font-black text-blue-600 dark:text-blue-400">QUIZlyGame</div>
         <ThemeToggle />
       </header>
 
