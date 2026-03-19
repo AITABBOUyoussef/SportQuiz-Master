@@ -6,7 +6,7 @@ const ResultPage = () => {
   
   return (
     <div className="text-center space-y-6 animate-in fade-in duration-500 bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-xl border border-gray-100 dark:border-slate-700">
-      <h1 className="text-4xl font-black text-slate-800 dark:text-white">Quiz Terminé !</h1>
+      <h1 className="text-4xl font-black text-slate-800 dark:text-white">Quiz Terminé </h1>
       <p className="text-6xl font-black text-blue-600 dark:text-blue-400">
         {score} <span className="text-2xl text-gray-400">/ {maxScore}</span>
       </p>
