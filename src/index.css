@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+:root {
+  --brand: #3101b9;
+  --brand-soft: #f3e8ff;
+  --surface: #ffffff;
+  --success: #22c55e;
+  --danger: #ef4444;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at 0% 0%, #ffffff 0%, #f3e8ff 50%, #e8dbff 100%);
+  color: #171321;
+}
+
+.theme-dark body {
+  background: radial-gradient(circle at 20% 0%, #2f2276 0%, #16132b 58%, #0f1020 100%);
+}
+
+.glass-card {
+  border-radius: 2rem;
+  background: var(--surface);
+  box-shadow: 0 20px 50px rgba(49, 1, 185, 0.12);
+}
+
+.theme-dark .glass-card {
+  background: #211d3a;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.brand-button {
+  border-radius: 1.25rem;
+  background-color: var(--brand);
+  color: #ffffff;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.brand-button:hover {
+  transform: translateY(-1px);
+  opacity: 0.92;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fade-up 300ms ease-out;
+}
