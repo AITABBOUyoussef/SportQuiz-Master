@@ -82,32 +82,43 @@ export default function QuizScreen({ category, onFinish, onQuit }) {
     setHintUsed(true);
   };
 
-  const questionCounter = useMemo(() => `${currentIndex + 1}/${questions.length}`, [currentIndex, questions.length]);
+  const questionCounter = useMemo(
+    () => `${currentIndex + 1}/${questions.length}`,
+    [currentIndex, questions.length]
+  );
 
   if (loading) return <Loading />;
   if (error) return <ErrorMessage message={error} onRetry={loadQuestions} />;
   if (!currentQuestion) return null;
 
   return (
-    <section className="fade-up space-y-4">
-      <header className="glass-card flex items-center justify-between p-4">
-        <div>
-          <p className="text-xs uppercase tracking-widest text-slate-500">Category</p>
-          <h1 className="text-2xl font-bold text-[#3101B9]">{category.title}</h1>
-        </div>
-        <div className="space-y-2 text-right">
-          <p className="rounded-2xl bg-[#F3E8FF] px-3 py-2 font-semibold text-[#3101B9]">{questionCounter}</p>
-          <p className="text-xs font-semibold text-slate-500">Score {score}</p>
-        </div>
-      </header>
+    <section className="fade-up space-y-6">
+      <div className="panel p-6 sm:p-8">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="eyebrow">Category</p>
+            <h1 className="mt-2 text-2xl font-semibold">{category.title}</h1>
+          </div>
 
-      <div className="glass-card space-y-4 p-4">
-        <div className="flex items-center justify-between gap-4">
-          <Timer key={`${currentIndex}-${selected}`} duration={TIMER_SECONDS} onTimeout={handleTimeout} />
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="pill">Question {questionCounter}</span>
+            <span className="pill">Score {score}</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="panel p-6 sm:p-8 space-y-5">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <Timer
+            key={`${currentIndex}-${selected}`}
+            duration={TIMER_SECONDS}
+            onTimeout={handleTimeout}
+          />
+
           <button
             onClick={useHint}
             disabled={hintUsed || Boolean(selected)}
-            className="rounded-2xl border border-purple-200 bg-[#F3E8FF] px-4 py-2 text-sm font-semibold text-[#3101B9] disabled:cursor-not-allowed disabled:opacity-50"
+            className="secondary-button w-full px-4 py-3 text-sm font-semibold sm:w-auto"
           >
             50/50 Hint
           </button>
@@ -125,23 +136,26 @@ export default function QuizScreen({ category, onFinish, onQuit }) {
       />
 
       {selected === "__timeout__" && (
-        <p className="text-center text-sm font-semibold text-red-500">Time is up. Press Next to continue.</p>
+        <p className="text-center text-sm font-semibold text-red-400">
+          Time is up. Press Next to continue.
+        </p>
       )}
 
-      <div className="grid grid-cols-2 gap-3">
-        <button onClick={onQuit} className="rounded-2xl border border-purple-200 bg-white px-4 py-3 font-semibold text-slate-600">
+      <div className="grid gap-3 sm:grid-cols-2">
+        <button onClick={onQuit} className="secondary-button w-full px-4 py-3 font-semibold">
           Back
         </button>
         <button
           onClick={goNext}
           disabled={!selected}
-          className="brand-button px-4 py-3 font-semibold disabled:cursor-not-allowed disabled:opacity-60"
+          className="brand-button w-full px-4 py-3 font-semibold"
         >
           {currentIndex + 1 === questions.length ? "Finish" : "Next"}
         </button>
       </div>
 
-      <p className="text-center text-sm font-semibold text-[#3101B9]">Score: {score}</p>
+      <p className="text-center text-sm font-semibold text-text-muted">Score: {score}</p>
     </section>
   );
 }
+

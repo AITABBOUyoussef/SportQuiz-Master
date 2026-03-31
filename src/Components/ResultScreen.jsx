@@ -2,20 +2,25 @@ export default function ResultScreen({ result, onBackHome, summaryText }) {
   const points = result.score * 50;
 
   return (
-    <section className="fade-up space-y-5">
-      <div className="glass-card p-6 text-center">
-        <p className="text-xs uppercase tracking-widest text-slate-500">Result</p>
-        <h1 className="mt-1 text-4xl font-bold text-[#3101B9]">
-          {result.score}/{result.total}
-        </h1>
-        <p className="mt-3 text-xl font-semibold text-[#3101B9]">Congratulations</p>
-        <p className="mt-1 text-slate-500">You finished the {result.category} challenge.</p>
+    <section className="fade-up space-y-6">
+      <div className="panel p-6 text-center">
+        <p className="eyebrow">Quiz complete</p>
+        <h2 className="mt-5 text-5xl font-semibold">{result.score}/{result.total}</h2>
+        <p className="mt-4 text-sm text-text-muted">You finished the {result.category} challenge.</p>
       </div>
 
-      <div className="glass-card p-5 text-center">
-        <p className="text-sm text-slate-500">Points earned</p>
-        <p className="text-3xl font-bold text-[#3101B9]">+{points}</p>
-        <p className="mt-2 text-sm text-slate-500">{summaryText}</p>
+      <div className="result-grid">
+        <div className="result-card">
+          <h3>Final score</h3>
+          <p className="mt-4 text-4xl font-semibold">{result.score}</p>
+          <p className="mt-2 text-sm text-text-muted">{result.total} Questions</p>
+        </div>
+
+        <div className="result-card">
+          <h3>Points earned</h3>
+          <p className="mt-4 text-4xl font-semibold">+{points}</p>
+          <p className="mt-2 text-sm text-text-muted">{summaryText}</p>
+        </div>
       </div>
 
       <button onClick={onBackHome} className="brand-button w-full py-4 text-lg font-semibold">

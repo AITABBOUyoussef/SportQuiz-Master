@@ -1,72 +1,99 @@
 export default function HomeScreen({ categories, history, onStart }) {
   return (
-    <section className="fade-up space-y-5">
-      <header className="glass-card flex items-center justify-between p-5">
-        <div>
-          <p className="text-sm text-slate-500">Welcome back</p>
-          <h1 className="text-2xl font-bold text-[#3101B9]">SportQuiz Master</h1>
-        </div>
-        <div className="grid h-12 w-12 place-content-center rounded-2xl bg-[#3101B9] font-bold text-white">
-          IQ
-        </div>
-      </header>
+    <section className="fade-up space-y-6">
+      <div className="panel p-6 sm:p-8">
+        <span className="eyebrow">Welcome back</span>
+        <h1 className="mt-4 text-3xl font-semibold sm:text-4xl">SportQuiz Master</h1>
+        <p className="mt-3 max-w-2xl text-sm leading-7 text-text-muted">
+          Elevate your sports trivia with a calm, polished experience built for focus and speed.
+        </p>
 
-      <div className="glass-card overflow-hidden p-5">
-        <div className="rounded-3xl bg-gradient-to-r from-[#3101B9] to-[#6D28D9] p-6 text-left text-white">
-          <p className="text-sm uppercase tracking-widest text-purple-200">Daily challenge</p>
-          <h2 className="text-3xl font-bold">Play and Win</h2>
-          <p className="mt-2 text-sm text-purple-100">Answer fast, climb the board, and collect points.</p>
+        <div className="mt-8 stat-grid">
+          <div className="stat-card">
+            <p className="text-sm uppercase tracking-[0.25em] text-text-muted">Categories</p>
+            <h3>{categories.length}</h3>
+          </div>
+          <div className="stat-card">
+            <p className="text-sm uppercase tracking-[0.25em] text-text-muted">Recent games</p>
+            <h3>{history.length}</h3>
+          </div>
+          <div className="stat-card">
+            <p className="text-sm uppercase tracking-[0.25em] text-text-muted">Fast start</p>
+            <h3>One tap</h3>
+          </div>
+          <div className="stat-card">
+            <p className="text-sm uppercase tracking-[0.25em] text-text-muted">Responsive</p>
+            <h3>Every device</h3>
+          </div>
+        </div>
+      </div>
+
+      <div className="panel p-6 sm:p-8">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+          <div className="max-w-xl">
+            <p className="eyebrow">Daily challenge</p>
+            <h2 className="mt-3 text-3xl font-semibold">Jump into a quick round and beat your best score.</h2>
+            <p className="mt-3 text-sm leading-7 text-text-muted">
+              Choose your favorite sports category and answer questions with confidence.
+            </p>
+          </div>
+
           <button
             onClick={() => onStart(categories[0])}
-            className="mt-4 rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-[#3101B9]"
+            className="brand-button w-full px-6 py-4 text-base font-semibold sm:w-auto"
           >
             Quick Start
           </button>
         </div>
       </div>
 
-      <div className="glass-card p-5">
-        <div className="mb-3 flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-[#3101B9]">Categories</h3>
+      <div className="panel p-6 sm:p-8">
+        <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h3 className="text-xl font-semibold">Choose a category</h3>
+            <p className="mt-2 text-sm text-text-muted">Select the sports quiz that fits your mood.</p>
+          </div>
+          <span className="pill">{categories.length} topics</span>
         </div>
 
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-3">
           {categories.map((category) => (
             <button
               key={category.title}
               onClick={() => onStart(category)}
-              className="rounded-3xl border border-purple-200 bg-[#F3E8FF] p-4 text-left transition hover:-translate-y-0.5 hover:border-[#3101B9]"
+              className="category-card"
             >
-              <span className="inline-grid h-7 w-7 place-content-center rounded-xl bg-white text-sm font-bold text-[#3101B9]">
-                {category.icon}
-              </span>
-              <p className="text-xs font-semibold uppercase tracking-wide text-purple-700">{category.subtitle}</p>
-              <p className="mt-1 text-lg font-bold text-[#3101B9]">{category.title}</p>
+              <div className="category-icon">{category.icon}</div>
+              <p className="category-subtitle">{category.subtitle}</p>
+              <p className="category-title">{category.title}</p>
             </button>
           ))}
         </div>
       </div>
 
-      <div className="glass-card p-5">
-        <h3 className="mb-3 text-left text-lg font-semibold text-[#3101B9]">Recent Activity</h3>
+      <div className="panel p-6 sm:p-8">
+        <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h3 className="text-xl font-semibold">Recent activity</h3>
+            <p className="mt-2 text-sm text-text-muted">Review your latest sessions and keep improving.</p>
+          </div>
+          <span className="pill">{history.length} games</span>
+        </div>
 
-        <ul className="space-y-2">
+        <ul className="space-y-3">
           {history.length === 0 && (
-            <li className="rounded-2xl bg-[#F3E8FF] p-3 text-left text-sm text-slate-500">
-              <span className="mr-2">-</span>
-              No recent games yet. Start your first quiz.
+            <li className="panel result-card">
+              <p className="text-sm text-text-muted">No recent games yet. Start your first quiz to build momentum.</p>
             </li>
           )}
 
           {history.map((item) => (
-            <li key={item.id} className="flex items-center justify-between rounded-2xl bg-[#F3E8FF] p-3 text-sm">
-              <div className="text-left">
-                <p className="font-semibold text-[#3101B9]">{item.category}</p>
-                <p className="text-slate-500">{item.playedAt}</p>
+            <li key={item.id} className="result-card">
+              <div>
+                <p className="font-semibold">{item.category}</p>
+                <p className="mt-1 text-sm text-text-muted">{item.playedAt}</p>
               </div>
-              <p className="rounded-xl bg-white px-3 py-1 font-bold text-[#3101B9]">
-                {item.score}/{item.total}
-              </p>
+              <div className="pill">{item.score}/{item.total}</div>
             </li>
           ))}
         </ul>

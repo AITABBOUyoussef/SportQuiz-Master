@@ -25,17 +25,15 @@ export default function Timer({ duration = 25, onTimeout }) {
   }, [duration, timeLeft]);
 
   return (
-    <div className="flex items-center justify-center">
-      <div
-        className="relative h-20 w-20 rounded-full"
-        style={{
-          background: `conic-gradient(#3101B9 ${progress * 3.6}deg, #E9D5FF 0deg)`,
-        }}
-      >
-        <div className="absolute inset-2 grid place-content-center rounded-full bg-white text-center">
-          <p className="text-[10px] uppercase tracking-wide text-slate-500">Timer</p>
-          <p className="font-semibold text-[#3101B9]">00:{String(timeLeft).padStart(2, "0")}</p>
-        </div>
+    <div
+      className="timer-ring"
+      style={{
+        background: `conic-gradient(var(--accent) ${progress * 3.6}deg, rgba(125, 211, 252, 0.15) 0deg)`,
+      }}
+    >
+      <div className="ring-inner">
+        <p className="timer-label">Timer</p>
+        <p className="timer-value">00:{String(timeLeft).padStart(2, "0")}</p>
       </div>
     </div>
   );

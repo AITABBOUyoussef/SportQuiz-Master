@@ -7,23 +7,23 @@ export default function QuestionCard({
 }) {
   const resolveState = (option) => {
     if (!selected) {
-      return "bg-white border-purple-200 text-slate-700 hover:border-[#3101B9]";
+      return "option-button";
     }
 
     if (option === question.correctAnswer) {
-      return "bg-green-500 border-green-500 text-white";
+      return "option-button correct";
     }
 
     if (option === selected && option !== question.correctAnswer) {
-      return "bg-red-500 border-red-500 text-white";
+      return "option-button wrong";
     }
 
-    return "bg-slate-100 border-slate-100 text-slate-400";
+    return "option-button disabled";
   };
 
   return (
-    <div className="glass-card space-y-5 p-5">
-      <h2 className="text-left text-xl font-semibold text-[#3101B9]">{question.question}</h2>
+    <div className="panel space-y-5 p-6">
+      <h2 className="text-xl font-semibold">{question.question}</h2>
 
       <div className="grid gap-3">
         {question.options.map((option) => {
@@ -37,9 +37,7 @@ export default function QuestionCard({
               onClick={() => onSelect(option)}
               disabled={Boolean(selected) || disabled}
               aria-label={`Answer option ${option}`}
-              className={`rounded-2xl border p-3 text-left font-medium transition ${resolveState(option)} ${
-                selected ? "cursor-not-allowed" : ""
-              }`}
+              className={`${resolveState(option)} ${selected ? "cursor-not-allowed" : ""}`}
             >
               {option}
             </button>

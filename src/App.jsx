@@ -19,7 +19,15 @@ function App() {
 
   return (
     <ThemeToggle>
-      <main className="mx-auto min-h-screen w-full max-w-md p-4 sm:max-w-lg sm:p-6">
+      <main className="mx-auto min-h-screen w-full max-w-4xl px-4 py-8 sm:px-6">
+        <div className="panel page-header mb-8 px-6 py-8 text-center sm:px-10">
+          <p className="eyebrow">Sports trivia</p>
+          <h1 className="page-title">A calm, modern quiz experience.</h1>
+          <p className="mt-4 max-w-2xl mx-auto text-sm leading-7 text-text-muted">
+            Pick a category, answer quickly, and track your score with a clean interface designed for focus.
+          </p>
+        </div>
+
         {screen === "home" && (
           <HomeScreen
             categories={categories}
