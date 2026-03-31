@@ -92,70 +92,88 @@ export default function QuizScreen({ category, onFinish, onQuit }) {
   if (!currentQuestion) return null;
 
   return (
-    <section className="fade-up space-y-6">
-      <div className="panel p-6 sm:p-8">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <section className="flex flex-col items-center min-h-screen bg-[#F3F4F6] py-8 px-4 font-sans">
+      <div className="w-full max-w-3xl space-y-6">
+        
+        {/* Lfo9: Score o Category */}
+        <div className="bg-white rounded-[20px] shadow-sm p-6 sm:p-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border border-gray-100">
           <div>
-            <p className="eyebrow">Category</p>
-            <h1 className="mt-2 text-2xl font-semibold">{category.title}</h1>
+            <p className="text-sm font-bold text-gray-400 uppercase tracking-wider">Category</p>
+            <h1 className="mt-1 text-2xl font-bold text-gray-800">{category.title}</h1>
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <span className="pill">Question {questionCounter}</span>
-            <span className="pill">Score {score}</span>
+            <span className="px-4 py-2 bg-blue-50 text-blue-700 font-bold rounded-full text-sm border border-blue-100">
+              Question {questionCounter}
+            </span>
+            <span className="px-4 py-2 bg-green-50 text-green-700 font-bold rounded-full text-sm border border-green-100">
+              Score {score}
+            </span>
           </div>
         </div>
-      </div>
 
-      <div className="panel p-6 sm:p-8 space-y-5">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <Timer
-            key={`${currentIndex}-${selected}`}
-            duration={TIMER_SECONDS}
-            onTimeout={handleTimeout}
-          />
+        {/* Lwst: Timer o Progress */}
+        <div className="bg-white rounded-[20px] shadow-sm p-6 sm:p-8 space-y-5 border border-gray-100">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <Timer
+              key={`${currentIndex}-${selected}`}
+              duration={TIMER_SECONDS}
+              onTimeout={handleTimeout}
+            />
 
-          <button
-            onClick={useHint}
-            disabled={hintUsed || Boolean(selected)}
-            className="secondary-button w-full px-4 py-3 text-sm font-semibold sm:w-auto"
+            <button
+              onClick={useHint}
+              disabled={hintUsed || Boolean(selected)}
+              className={`px-6 py-3 rounded-xl font-bold bg-amber-900 transition-all duration-300 flex items-center justify-center gap-2
+                ${hintUsed || Boolean(selected) 
+                  ? 'bg-gray-600 text-gray-400 cursor-not-allowed' 
+                  : 'bg-yellow-600 text-amber-700 hover:bg-amber-200 border border-amber-200'}`}
+            >
+               50/50 Hint
+            </button>
+          </div>
+
+          <ProgressBar current={currentIndex + 1} total={questions.length} />
+        </div>
+
+        {/* L'wra9a d So2al */}
+        <QuestionCard
+          question={currentQuestion}
+          selected={selected === "__timeout__" ? "" : selected}
+          onSelect={handleSelect}
+          disabled={selected === "__timeout__"}
+          hiddenOptions={hiddenOptions}
+        />
+
+        {/* ila sala lwe9t */}
+        {selected === "__timeout__" && (
+          <p className="text-center text-lg font-bold text-red-500 bg-red-50 p-4 rounded-xl border border-red-200">
+             Time is up! Press Next to continue.
+          </p>
+        )}
+
+        {/* Lbotounat dte7t (Next / Back) */}
+        <div className="flex flex-col sm:flex-row gap-4 pt-4">
+          <button 
+            onClick={onQuit} 
+            className="w-full sm:w-1/3 px-6 py-4 rounded-xl font-bold text-gray-600 bg-white border-2 border-gray-200 hover:bg-gray-50 hover:text-gray-800 transition-all"
           >
-            50/50 Hint
+            Back
+          </button>
+          <button
+            onClick={goNext}
+            disabled={!selected}
+            className={`w-full sm:w-2/3 px-6 py-4 rounded-xl font-bold text-white transition-all text-lg flex items-center justify-center gap-2
+              ${selected 
+                ? 'bg-blue-600 hover:bg-blue-700 shadow-lg hover:shadow-xl transform hover:-translate-y-1' 
+                : 'bg-gray-300 cursor-not-allowed opacity-70'
+              }`}
+          >
+            {currentIndex + 1 === questions.length ? "Finish Quiz " : "Next Question ➔"}
           </button>
         </div>
 
-        <ProgressBar current={currentIndex + 1} total={questions.length} />
       </div>
-
-      <QuestionCard
-        question={currentQuestion}
-        selected={selected === "__timeout__" ? "" : selected}
-        onSelect={handleSelect}
-        disabled={selected === "__timeout__"}
-        hiddenOptions={hiddenOptions}
-      />
-
-      {selected === "__timeout__" && (
-        <p className="text-center text-sm font-semibold text-red-400">
-          Time is up. Press Next to continue.
-        </p>
-      )}
-
-      <div className="grid gap-3 sm:grid-cols-2">
-        <button onClick={onQuit} className="secondary-button w-full px-4 py-3 font-semibold">
-          Back
-        </button>
-        <button
-          onClick={goNext}
-          disabled={!selected}
-          className="brand-button w-full px-4 py-3 font-semibold"
-        >
-          {currentIndex + 1 === questions.length ? "Finish" : "Next"}
-        </button>
-      </div>
-
-      <p className="text-center text-sm font-semibold text-text-muted">Score: {score}</p>
     </section>
   );
 }
-

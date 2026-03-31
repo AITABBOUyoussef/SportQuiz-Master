@@ -19,11 +19,11 @@ function App() {
 
   return (
     <ThemeToggle>
-      <main className="mx-auto min-h-screen w-full max-w-4xl px-4 py-8 sm:px-6">
-        <div className="panel page-header mb-8 px-6 py-8 text-center sm:px-10">
-          <p className="eyebrow">Sports trivia</p>
-          <h1 className="page-title">A calm, modern quiz experience.</h1>
-          <p className="mt-4 max-w-2xl mx-auto text-sm leading-7 text-text-muted">
+      <main className="mx-auto min-h-screen w-full bg-gray-200 max-w-4xl px-4 py-8 sm:px-6">
+        <div className=" bg-white mb-8 px-6 py-8 text-center sm:px-10">
+          <p className="text-blue-600  font-extrabold text-3xl">Sports trivia</p>
+          <h1 className="text-gray-800 font-extrabold text-2xl">A calm, modern quiz experience.</h1>
+          <p className="mt-4 max-w-2xl mx-auto  leading-7  font-semibold text-xl text-black">
             Pick a category, answer quickly, and track your score with a clean interface designed for focus.
           </p>
         </div>

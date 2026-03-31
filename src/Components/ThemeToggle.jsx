@@ -9,7 +9,7 @@ export default function ThemeToggle({ children }) {
   }, [theme]);
 
   return (
-    <div className="min-h-screen bg-transparent text-white transition-colors duration-300">
+    <div className="min-h-screen bg-gray-200 text-gray-200 transition-colors duration-300">
       <div className="mx-auto flex w-full max-w-4xl justify-end px-4 pt-4 sm:px-6">
         <button
           onClick={() => setTheme((current) => (current === "light" ? "dark" : "light"))}
