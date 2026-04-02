@@ -14,6 +14,7 @@ export default function QuizScreen({ difficulty, onFinish, onQuit }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selected, setSelected] = useState("");
   const [score, setScore] = useState(0);
+  const [detailedResults, setDetailedResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [hintUsed, setHintUsed] = useState(false);
@@ -31,6 +32,7 @@ export default function QuizScreen({ difficulty, onFinish, onQuit }) {
       setCurrentIndex(0);
       setSelected("");
       setScore(0);
+      setDetailedResults([]);
       setHintUsed(false);
       setHiddenOptions([]);
     } catch {
@@ -45,16 +47,42 @@ export default function QuizScreen({ difficulty, onFinish, onQuit }) {
   }, [loadQuestions]);
 
   const goNext = useCallback(() => {
+    const isTimeout = selected === "__timeout__";
+
+    if (selected) {
+      const detail = {
+        questionText: currentQuestion.question,
+        correctAnswer: currentQuestion.correctAnswer,
+        userAnswer: isTimeout ? "No answer" : selected,
+        isCorrect: !isTimeout && selected === currentQuestion.correctAnswer,
+      };
+
+      setDetailedResults((previous) => [...previous, detail]);
+    }
+
     setSelected("");
     setHiddenOptions([]);
+    setHintUsed(false);
 
     if (currentIndex + 1 >= questions.length) {
-      onFinish({ score, total: questions.length });
+      const nextDetails = selected
+        ? [
+            ...detailedResults,
+            {
+              questionText: currentQuestion.question,
+              correctAnswer: currentQuestion.correctAnswer,
+              userAnswer: isTimeout ? "No answer" : selected,
+              isCorrect: !isTimeout && selected === currentQuestion.correctAnswer,
+            },
+          ]
+        : detailedResults;
+
+      onFinish({ score, total: questions.length, details: nextDetails });
       return;
     }
 
     setCurrentIndex((prev) => prev + 1);
-  }, [currentIndex, onFinish, questions.length, score]);
+  }, [currentIndex, currentQuestion, detailedResults, onFinish, questions.length, score, selected]);
 
   const handleSelect = (answer) => {
     if (selected) return;

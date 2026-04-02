@@ -34,7 +34,7 @@ function useQuizLogic() {
     setScreen("quiz");
   };
 
-  const completeQuiz = ({ score, total }) => {
+  const completeQuiz = ({ score, total, details }) => {
     const item = {
       id: Date.now(),
       difficulty: selectedDifficulty.label,
@@ -46,7 +46,7 @@ function useQuizLogic() {
     const nextHistory = [item, ...history].slice(0, 6);
     setHistory(nextHistory);
     localStorage.setItem("quiz-history", JSON.stringify(nextHistory));
-    setSessionResult(item);
+    setSessionResult({ ...item, details });
     setScreen("result");
   };
 
