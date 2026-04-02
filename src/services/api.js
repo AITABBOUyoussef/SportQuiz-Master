@@ -17,8 +17,8 @@ export const shuffleArray = (items) => {
 	return next;
 };
 
-export const fetchQuestions = async ({ amount = 20, categoryId = 19 } = {}) => {
-	const url = `${API_URL}?amount=${amount}&category=${categoryId}&type=multiple`;
+export const fetchQuestions = async ({ amount = 20, difficulty = "easy" } = {}) => {
+	const url = `${API_URL}?amount=${amount}&category=21&difficulty=${difficulty}&type=multiple`;
 	const response = await fetch(url);
 
 	if (!response.ok) {

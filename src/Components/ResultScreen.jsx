@@ -1,12 +1,13 @@
 export default function ResultScreen({ result, onBackHome, summaryText }) {
   const points = result.score * 50;
+  const modePlayed = result.difficulty || result.category;
 
   return (
     <section className="fade-up space-y-6">
       <div className="panel p-6 text-center">
         <p className="eyebrow">Quiz complete</p>
         <h2 className="mt-5 text-5xl font-semibold">{result.score}/{result.total}</h2>
-        <p className="mt-4 text-sm text-text-muted">You finished the {result.category} challenge.</p>
+        <p className="mt-4 text-sm text-text-muted">You finished the {modePlayed} challenge.</p>
       </div>
 
       <div className="result-grid">

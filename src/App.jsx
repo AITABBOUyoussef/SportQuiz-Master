@@ -6,13 +6,13 @@ import useQuizLogic from "./hooks/useQuizLogic";
 
 function App() {
   const {
-    categories,
+    difficulties,
     screen,
-    selectedCategory,
+    selectedDifficulty,
     sessionResult,
     history,
     summaryText,
-    startCategory,
+    startDifficulty,
     completeQuiz,
     setScreen,
   } = useQuizLogic();
@@ -24,21 +24,21 @@ function App() {
           <p className="text-blue-600  font-extrabold text-3xl">Sports trivia</p>
           <h1 className="text-gray-800 font-extrabold text-2xl">A calm, modern quiz experience.</h1>
           <p className="mt-4 max-w-2xl mx-auto  leading-7  font-semibold text-xl text-black">
-            Pick a category, answer quickly, and track your score with a clean interface designed for focus.
+            Pick a difficulty, answer quickly, and track your score with a clean interface designed for focus.
           </p>
         </div>
 
         {screen === "home" && (
           <HomeScreen
-            categories={categories}
+            difficulties={difficulties}
             history={history}
-            onStart={startCategory}
+            onStart={startDifficulty}
           />
         )}
 
         {screen === "quiz" && (
           <QuizScreen
-            category={selectedCategory}
+            difficulty={selectedDifficulty}
             onQuit={() => setScreen("home")}
             onFinish={completeQuiz}
           />

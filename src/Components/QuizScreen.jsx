@@ -9,7 +9,7 @@ import { fetchQuestions, shuffleArray } from "../services/api";
 const QUESTION_LIMIT = 20;
 const TIMER_SECONDS = 25;
 
-export default function QuizScreen({ category, onFinish, onQuit }) {
+export default function QuizScreen({ difficulty, onFinish, onQuit }) {
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selected, setSelected] = useState("");
@@ -26,7 +26,7 @@ export default function QuizScreen({ category, onFinish, onQuit }) {
     setError("");
 
     try {
-      const data = await fetchQuestions({ amount: QUESTION_LIMIT, categoryId: category.id });
+      const data = await fetchQuestions({ amount: QUESTION_LIMIT, difficulty: difficulty.value });
       setQuestions(data);
       setCurrentIndex(0);
       setSelected("");
@@ -38,7 +38,7 @@ export default function QuizScreen({ category, onFinish, onQuit }) {
     } finally {
       setLoading(false);
     }
-  }, [category.id]);
+  }, [difficulty.value]);
 
   useEffect(() => {
     loadQuestions();
@@ -95,11 +95,11 @@ export default function QuizScreen({ category, onFinish, onQuit }) {
     <section className="flex flex-col items-center min-h-screen bg-[#F3F4F6] py-8 px-4 font-sans">
       <div className="w-full max-w-3xl space-y-6">
         
-        {/* Lfo9: Score o Category */}
+        {/* Lfo9: Score o Difficulty */}
         <div className="bg-white rounded-[20px] shadow-sm p-6 sm:p-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border border-gray-100">
           <div>
-            <p className="text-sm font-bold text-gray-400 uppercase tracking-wider">Category</p>
-            <h1 className="mt-1 text-2xl font-bold text-gray-800">{category.title}</h1>
+            <p className="text-sm font-bold text-gray-400 uppercase tracking-wider">Quiz</p>
+            <h1 className="mt-1 text-2xl font-bold text-gray-800">Sports - {difficulty.label}</h1>
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
